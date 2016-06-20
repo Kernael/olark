@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620083243) do
+ActiveRecord::Schema.define(version: 20160620085714) do
 
   create_table "chats", force: :cascade do |t|
     t.integer  "customer_id"
@@ -29,5 +29,14 @@ ActiveRecord::Schema.define(version: 20160620083243) do
   end
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "chat_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "messages", ["chat_id"], name: "index_messages_on_chat_id"
 
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   resources :chats, only: %i(show)
   resources :customers, only: %i(new create show)
   root 'customers#new'
