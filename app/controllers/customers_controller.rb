@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i(show destroy)
+  before_action :set_customer, only: %i(show)
 
   def new
     @customer = Customer.new
@@ -10,7 +10,8 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to '/' }
+        chat = Chat.create(customer_id: @customer.id)
+        format.html { redirect_to chat_path(chat) }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }
